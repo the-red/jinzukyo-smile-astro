@@ -1,16 +1,119 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="神通峡すまいる - 富山市神通峡地域ポータルサイト">
+	<div class="hero-section">
+		<div class="container">
+			<h1 class="hero-title">神通峡すまいる</h1>
+			<div class="hero-image-container">
+				<img src="/jinzukyo-smile.jpg" alt="神通峡の美しい景色と赤い橋" class="hero-image">
+				<p class="image-caption">新緑の丹精峡と五番橋</p>
+			</div>
+			<div class="intro-text">
+				<p class="site-description">
+					地域ポータルサイト「神通峡すまいる」へようこそ！
+				</p>
+				<p class="main-description">
+					富山市の神通峡地域（旧八尾地域・下夕地域）は、四季折々の豊かな自然や多彩なお祭りを楽しむながら、富山市街地へのアクセスも良く、健康で生きがいと喜びも伴う地域です。
+				</p>
+				<p class="social-description">
+					当サイトでは、神通峡地域の魅力や日々の暮らしを各情報をどんどんお届けしておりますので、お楽しみいただけると幸いです。
+					<a href="#" class="social-link">Instagram</a>・<a href="#" class="social-link">Facebook</a>でも、季節の写真や地域イベントのレポートなどを随時更新中です。ぜひフォローしてください！
+				</p>
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.hero-section {
+		background: white;
+		padding: 2rem 0 3rem;
+	}
+
+	.container {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+
+	.hero-title {
+		font-size: 2.5rem;
+		color: #2c5aa0;
+		text-align: center;
+		margin-bottom: 2rem;
+		font-weight: bold;
+		border-bottom: 3px solid #2c5aa0;
+		display: inline-block;
+		width: 100%;
+		padding-bottom: 0.5rem;
+	}
+
+	.hero-image-container {
+		text-align: center;
+		margin: 2rem 0;
+	}
+
+	.hero-image {
+		width: 100%;
+		max-width: 700px;
+		height: auto;
+		border-radius: 8px;
+		box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+	}
+
+	.image-caption {
+		margin-top: 0.5rem;
+		font-size: 0.9rem;
+		color: #666;
+		font-style: italic;
+	}
+
+	.intro-text {
+		margin-top: 2rem;
+	}
+
+	.site-description {
+		font-size: 1.2rem;
+		font-weight: bold;
+		color: #2c5aa0;
+		text-align: center;
+		margin-bottom: 1.5rem;
+	}
+
+	.main-description {
+		line-height: 1.8;
+		margin-bottom: 1.5rem;
+		color: #333;
+	}
+
+	.social-description {
+		line-height: 1.8;
+		color: #333;
+	}
+
+	.social-link {
+		color: #2c5aa0;
+		text-decoration: underline;
+		transition: color 0.2s;
+	}
+
+	.social-link:hover {
+		color: #1a4480;
+	}
+
+	@media (max-width: 768px) {
+		.container {
+			padding: 0 1rem;
+		}
+
+		.hero-title {
+			font-size: 2rem;
+		}
+
+		.site-description {
+			font-size: 1.1rem;
+		}
+	}
+</style>
