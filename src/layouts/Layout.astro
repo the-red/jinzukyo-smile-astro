@@ -59,9 +59,10 @@ const { title } = Astro.props;
 				text-decoration: none;
 			}
 
-			.logo::before {
-				content: "🏔️";
-				font-size: 1.5rem;
+			.logo-image {
+				height: 50px;
+				width: auto;
+				object-fit: contain;
 			}
 
 			.nav {
@@ -81,6 +82,41 @@ const { title } = Astro.props;
 				color: #2c5aa0;
 			}
 
+			.hamburger {
+				display: none;
+				flex-direction: column;
+				gap: 4px;
+				background: none;
+				border: none;
+				cursor: pointer;
+				padding: 8px;
+				transition: transform 0.2s;
+			}
+
+			.hamburger:hover {
+				transform: scale(1.1);
+			}
+
+			.hamburger-line {
+				width: 25px;
+				height: 3px;
+				background-color: #2c5aa0;
+				transition: all 0.3s;
+				border-radius: 2px;
+			}
+
+			.hamburger.active .hamburger-line:nth-child(1) {
+				transform: rotate(45deg) translate(8px, 8px);
+			}
+
+			.hamburger.active .hamburger-line:nth-child(2) {
+				opacity: 0;
+			}
+
+			.hamburger.active .hamburger-line:nth-child(3) {
+				transform: rotate(-45deg) translate(6px, -6px);
+			}
+
 			.main {
 				min-height: calc(100vh - 80px);
 			}
@@ -91,13 +127,50 @@ const { title } = Astro.props;
 				}
 				
 				.header-content {
-					flex-direction: column;
-					text-align: center;
+					justify-content: space-between;
+					align-items: center;
+				}
+
+				.hamburger {
+					display: flex;
 				}
 				
 				.nav {
-					justify-content: center;
-					gap: 1rem;
+					position: fixed;
+					top: 80px;
+					left: 0;
+					width: 100%;
+					background: white;
+					box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+					flex-direction: column;
+					padding: 1rem 0;
+					gap: 0;
+					transform: translateY(-100%);
+					opacity: 0;
+					visibility: hidden;
+					transition: all 0.3s ease-in-out;
+					z-index: 1000;
+				}
+
+				.nav.active {
+					transform: translateY(0);
+					opacity: 1;
+					visibility: visible;
+				}
+
+				.nav a {
+					padding: 1rem 2rem;
+					border-bottom: 1px solid #f0f0f0;
+					display: block;
+					text-align: left;
+				}
+
+				.nav a:last-child {
+					border-bottom: none;
+				}
+
+				.nav a:hover {
+					background-color: #f8f9fa;
 				}
 			}
 		</style>
@@ -106,8 +179,15 @@ const { title } = Astro.props;
 		<header class="header">
 			<div class="container">
 				<div class="header-content">
-					<a href="/" class="logo">神通峡すまいる</a>
-					<nav class="nav">
+					<a href="/" class="logo">
+						<img src="/logo.png" alt="神通峡すまいる ロゴ" class="logo-image">
+					</a>
+					<button class="hamburger" id="hamburger" aria-label="メニューを開く">
+						<span class="hamburger-line"></span>
+						<span class="hamburger-line"></span>
+						<span class="hamburger-line"></span>
+					</button>
+					<nav class="nav" id="nav">
 						<a href="#news">お知らせ</a>
 						<a href="#sightseeing">観光・地域紹介</a>
 						<a href="#products">特産品</a>
@@ -123,5 +203,41 @@ const { title } = Astro.props;
 		<main class="main">
 			<slot />
 		</main>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const hamburger = document.getElementById('hamburger');
+				const nav = document.getElementById('nav');
+				
+				if (hamburger && nav) {
+					hamburger.addEventListener('click', function() {
+						hamburger.classList.toggle('active');
+						nav.classList.toggle('active');
+						
+						// Update aria-label for accessibility
+						const isActive = hamburger.classList.contains('active');
+						hamburger.setAttribute('aria-label', isActive ? 'メニューを閉じる' : 'メニューを開く');
+					});
+					
+					// Close menu when clicking on nav links
+					const navLinks = nav.querySelectorAll('a');
+					navLinks.forEach(link => {
+						link.addEventListener('click', function() {
+							hamburger.classList.remove('active');
+							nav.classList.remove('active');
+							hamburger.setAttribute('aria-label', 'メニューを開く');
+						});
+					});
+					
+					// Close menu when clicking outside
+					document.addEventListener('click', function(event) {
+						if (!hamburger.contains(event.target) && !nav.contains(event.target)) {
+							hamburger.classList.remove('active');
+							nav.classList.remove('active');
+							hamburger.setAttribute('aria-label', 'メニューを開く');
+						}
+					});
+				}
+			});
+		</script>
 	</body>
 </html>
