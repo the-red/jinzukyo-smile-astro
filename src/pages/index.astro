@@ -1,5 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// httpbin.org/ip からIPアドレスを取得（SSRテスト用）
+let ipData = { origin: 'Loading...' };
+try {
+	const response = await fetch('https://httpbin.org/ip');
+	ipData = await response.json();
+} catch (error) {
+	ipData = { origin: 'Error fetching IP' };
+}
 ---
 
 <Layout title="神通峡すまいる - 富山市神通峡地域ポータルサイト">
@@ -21,6 +30,12 @@ import Layout from '../layouts/Layout.astro';
 					当サイトでは、神通峡地域の魅力や日々の暮らしを彩る情報をどんどんお届けして参りますので、お楽しみいただければ幸いです。
 					<a href="https://www.instagram.com/jinzukyo/" class="social-link">Instagram</a>・<a href="https://www.facebook.com/jinzukyo" class="social-link">Facebook</a>でも、季節の写真や地域イベントのレポートなどを随時更新中です。ぜひフォローしてみてください！
 				</p>
+				
+				<div class="ssr-test">
+					<h3>SSRテスト</h3>
+					<p>現在のIPアドレス: <code>{ipData.origin}</code></p>
+					<p class="test-note">※ SSRならVercelサーバーのIP、SSGなら開発PCのIPが表示されます</p>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -101,6 +116,35 @@ import Layout from '../layouts/Layout.astro';
 
 	.social-link:hover {
 		color: #1a4480;
+	}
+
+	.ssr-test {
+		margin-top: 2rem;
+		padding: 1.5rem;
+		background: #f0f8ff;
+		border-radius: 8px;
+		border-left: 4px solid #2c5aa0;
+	}
+
+	.ssr-test h3 {
+		color: #2c5aa0;
+		margin-bottom: 1rem;
+		font-size: 1.2rem;
+	}
+
+	.ssr-test code {
+		background: #e6f3ff;
+		padding: 0.2rem 0.5rem;
+		border-radius: 4px;
+		font-family: 'Monaco', 'Consolas', monospace;
+		color: #d73a49;
+	}
+
+	.test-note {
+		font-size: 0.9rem;
+		color: #666;
+		margin-top: 0.5rem;
+		font-style: italic;
 	}
 
 	@media (max-width: 768px) {
