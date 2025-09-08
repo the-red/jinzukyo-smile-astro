@@ -1,0 +1,199 @@
+---
+// Header component - サイトのヘッダー・ナビゲーション
+---
+
+<header class="header">
+	<div class="container">
+		<div class="header-content">
+			<a href="/" class="logo">
+				<img src="/logo.png" alt="神通峡すまいる ロゴ" class="logo-image">
+			</a>
+			<button class="hamburger" id="hamburger" aria-label="メニューを開く">
+				<span class="hamburger-line"></span>
+				<span class="hamburger-line"></span>
+				<span class="hamburger-line"></span>
+			</button>
+			<nav class="nav" id="nav">
+				<a href="#news">お知らせ</a>
+				<a href="#sightseeing">観光・地域紹介</a>
+				<a href="/specialty">特産品</a>
+				<a href="#matsuri">祭り・獅子舞</a>
+				<a href="#voice">移住者の声</a>
+				<a href="#realestate">住宅・土地情報</a>
+				<a href="#access">アクセス</a>
+				<a href="#inquiry">お問い合わせ</a>
+			</nav>
+		</div>
+	</div>
+</header>
+
+<style>
+	/* ヘッダー専用のスコープドスタイル */
+	.header {
+		background: white;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		padding: 1rem 0;
+	}
+
+	.header-content {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+
+	.logo {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 1.2rem;
+		font-weight: bold;
+		color: var(--primary-color);
+		text-decoration: none;
+	}
+
+	.logo-image {
+		height: 50px;
+		width: auto;
+		object-fit: contain;
+	}
+
+	.nav {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 2rem;
+	}
+
+	.nav a {
+		color: var(--text-color);
+		text-decoration: none;
+		font-size: 0.9rem;
+		transition: color 0.2s;
+	}
+
+	.nav a:hover {
+		color: var(--primary-color);
+	}
+
+	.hamburger {
+		display: none;
+		flex-direction: column;
+		gap: 4px;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 8px;
+		transition: transform 0.2s;
+	}
+
+	.hamburger:hover {
+		transform: scale(1.1);
+	}
+
+	.hamburger-line {
+		width: 25px;
+		height: 3px;
+		background-color: var(--primary-color);
+		transition: all 0.3s;
+		border-radius: 2px;
+	}
+
+	.hamburger.active .hamburger-line:nth-child(1) {
+		transform: rotate(45deg) translate(8px, 8px);
+	}
+
+	.hamburger.active .hamburger-line:nth-child(2) {
+		opacity: 0;
+	}
+
+	.hamburger.active .hamburger-line:nth-child(3) {
+		transform: rotate(-45deg) translate(6px, -6px);
+	}
+
+	@media (max-width: 768px) {
+		.header-content {
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.hamburger {
+			display: flex;
+		}
+
+		.nav {
+			position: fixed;
+			top: 80px;
+			left: 0;
+			width: 100%;
+			background: white;
+			box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+			flex-direction: column;
+			padding: 1rem 0;
+			gap: 0;
+			transform: translateY(-100%);
+			opacity: 0;
+			visibility: hidden;
+			transition: all 0.3s ease-in-out;
+			z-index: 1000;
+		}
+
+		.nav.active {
+			transform: translateY(0);
+			opacity: 1;
+			visibility: visible;
+		}
+
+		.nav a {
+			padding: 1rem 2rem;
+			border-bottom: 1px solid var(--border-color);
+			display: block;
+			text-align: left;
+		}
+
+		.nav a:last-child {
+			border-bottom: none;
+		}
+
+		.nav a:hover {
+			background-color: var(--background-color);
+		}
+	}
+</style>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const hamburger = document.getElementById('hamburger');
+		const nav = document.getElementById('nav');
+		
+		if (hamburger && nav) {
+			hamburger.addEventListener('click', function() {
+				hamburger.classList.toggle('active');
+				nav.classList.toggle('active');
+				
+				// Update aria-label for accessibility
+				const isActive = hamburger.classList.contains('active');
+				hamburger.setAttribute('aria-label', isActive ? 'メニューを閉じる' : 'メニューを開く');
+			});
+			
+			// Close menu when clicking on nav links
+			const navLinks = nav.querySelectorAll('a');
+			navLinks.forEach(link => {
+				link.addEventListener('click', function() {
+					hamburger.classList.remove('active');
+					nav.classList.remove('active');
+					hamburger.setAttribute('aria-label', 'メニューを開く');
+				});
+			});
+			
+			// Close menu when clicking outside
+			document.addEventListener('click', function(event) {
+				if (!hamburger.contains(event.target as Node) && !nav.contains(event.target as Node)) {
+					hamburger.classList.remove('active');
+					nav.classList.remove('active');
+					hamburger.setAttribute('aria-label', 'メニューを開く');
+				}
+			});
+		}
+	});
+</script>
