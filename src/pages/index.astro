@@ -2,12 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 
 // https://worldtimeapi.org/api/timezone/Asia/Tokyo から現在の日時を取得（SSRテスト用）
-let timeData = { datetime: 'Loading...' };
+let timeData = { dateTime: 'Loading...' };
 try {
-	const response = await fetch('https://worldtimeapi.org/api/timezone/Asia/Tokyo');
+	const response = await fetch('https://timeapi.io/api/Time/current/zone?timeZone=Asia/Tokyo');
 	timeData = await response.json();
 } catch (error) {
-	timeData = { datetime: 'Error fetching time' };
+	timeData = { dateTime: 'Error fetching time' };
 }
 ---
 
@@ -33,7 +33,7 @@ try {
 
 				<div class="ssr-test">
 					<h3>SSRテスト</h3>
-					<p>現在の日時: <code>{timeData.datetime}</code></p>
+					<p>現在の日時: <code>{timeData.dateTime}</code></p>
 					<p class="test-note">※ SSRなら現在時刻、SSGならビルド時刻が表示されます</p>
 				</div>
 			</div>
