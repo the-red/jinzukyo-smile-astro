@@ -15,31 +15,14 @@ const { title } = Astro.props;
 		<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
+		<link rel="stylesheet" href="/src/styles/global.css" />
 		<title>{title}</title>
 		<style>
-			* {
-				margin: 0;
-				padding: 0;
-				box-sizing: border-box;
-			}
-
-			body {
-				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Hiragino Sans', 'ヒラギノ角ゴシック', 'Yu Gothic UI', 'Meiryo UI', sans-serif;
-				line-height: 1.6;
-				color: #333;
-				background-color: #f8f9fa;
-			}
-
+			/* ヘッダー特有のスタイル */
 			.header {
 				background: white;
 				box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 				padding: 1rem 0;
-			}
-
-			.container {
-				max-width: 1200px;
-				margin: 0 auto;
-				padding: 0 2rem;
 			}
 
 			.header-content {
@@ -56,7 +39,7 @@ const { title } = Astro.props;
 				gap: 0.5rem;
 				font-size: 1.2rem;
 				font-weight: bold;
-				color: #2c5aa0;
+				color: var(--primary-color);
 				text-decoration: none;
 			}
 
@@ -73,14 +56,14 @@ const { title } = Astro.props;
 			}
 
 			.nav a {
-				color: #333;
+				color: var(--text-color);
 				text-decoration: none;
 				font-size: 0.9rem;
 				transition: color 0.2s;
 			}
 
 			.nav a:hover {
-				color: #2c5aa0;
+				color: var(--primary-color);
 			}
 
 			.hamburger {
@@ -101,7 +84,7 @@ const { title } = Astro.props;
 			.hamburger-line {
 				width: 25px;
 				height: 3px;
-				background-color: #2c5aa0;
+				background-color: var(--primary-color);
 				transition: all 0.3s;
 				border-radius: 2px;
 			}
@@ -123,10 +106,6 @@ const { title } = Astro.props;
 			}
 
 			@media (max-width: 768px) {
-				.container {
-					padding: 0 1rem;
-				}
-
 				.header-content {
 					justify-content: space-between;
 					align-items: center;
@@ -161,7 +140,7 @@ const { title } = Astro.props;
 
 				.nav a {
 					padding: 1rem 2rem;
-					border-bottom: 1px solid #f0f0f0;
+					border-bottom: 1px solid var(--border-color);
 					display: block;
 					text-align: left;
 				}
@@ -171,7 +150,7 @@ const { title } = Astro.props;
 				}
 
 				.nav a:hover {
-					background-color: #f8f9fa;
+					background-color: var(--background-color);
 				}
 			}
 		</style>

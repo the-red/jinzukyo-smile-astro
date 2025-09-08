@@ -13,7 +13,7 @@ try {
 
 <Layout title="神通峡すまいる - 富山市神通峡地域ポータルサイト">
 	<div class="hero-section">
-		<div class="container">
+		<div class="container-narrow">
 			<h1 class="hero-title">神通峡すまいる</h1>
 			<div class="hero-image-container">
 				<img src="/jinzukyo-smile.jpg" alt="新緑の片路峡と寺津橋" class="hero-image">
@@ -30,7 +30,7 @@ try {
 					当サイトでは、神通峡地域の魅力や日々の暮らしを彩る情報をどんどんお届けして参りますので、お楽しみいただければ幸いです。
 					<a href="https://www.instagram.com/jinzukyo/" class="social-link">Instagram</a>・<a href="https://www.facebook.com/jinzukyo" class="social-link">Facebook</a>でも、季節の写真や地域イベントのレポートなどを随時更新中です。ぜひフォローしてみてください！
 				</p>
-
+				
 				<div class="ssr-test">
 					<h3>SSRテスト</h3>
 					<p>現在の日時: <code>{timeData.dateTime}</code></p>
@@ -42,122 +42,8 @@ try {
 </Layout>
 
 <style>
-	.hero-section {
-		background: white;
-		padding: 2rem 0 3rem;
-	}
-
-	.container {
-		max-width: 900px;
-		margin: 0 auto;
-		padding: 0 2rem;
-	}
-
-	.hero-title {
-		font-size: 2.5rem;
-		color: #2c5aa0;
-		text-align: center;
-		margin-bottom: 2rem;
-		font-weight: bold;
-		border-bottom: 3px solid #2c5aa0;
-		display: inline-block;
-		width: 100%;
-		padding-bottom: 0.5rem;
-	}
-
-	.hero-image-container {
-		text-align: center;
-		margin: 2rem 0;
-	}
-
-	.hero-image {
-		width: 100%;
-		max-width: 700px;
-		height: auto;
-		border-radius: 8px;
-		box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-	}
-
-	.image-caption {
-		margin-top: 0.5rem;
-		font-size: 0.9rem;
-		color: #666;
-		font-style: italic;
-	}
-
+	/* インデックスページ特有のスタイル */
 	.intro-text {
 		margin-top: 2rem;
-	}
-
-	.site-description {
-		font-size: 1.2rem;
-		font-weight: bold;
-		color: #2c5aa0;
-		text-align: center;
-		margin-bottom: 1.5rem;
-	}
-
-	.main-description {
-		line-height: 1.8;
-		margin-bottom: 1.5rem;
-		color: #333;
-	}
-
-	.social-description {
-		line-height: 1.8;
-		color: #333;
-	}
-
-	.social-link {
-		color: #2c5aa0;
-		text-decoration: underline;
-		transition: color 0.2s;
-	}
-
-	.social-link:hover {
-		color: #1a4480;
-	}
-
-	.ssr-test {
-		margin-top: 2rem;
-		padding: 1.5rem;
-		background: #f0f8ff;
-		border-radius: 8px;
-		border-left: 4px solid #2c5aa0;
-	}
-
-	.ssr-test h3 {
-		color: #2c5aa0;
-		margin-bottom: 1rem;
-		font-size: 1.2rem;
-	}
-
-	.ssr-test code {
-		background: #e6f3ff;
-		padding: 0.2rem 0.5rem;
-		border-radius: 4px;
-		font-family: 'Monaco', 'Consolas', monospace;
-		color: #d73a49;
-	}
-
-	.test-note {
-		font-size: 0.9rem;
-		color: #666;
-		margin-top: 0.5rem;
-		font-style: italic;
-	}
-
-	@media (max-width: 768px) {
-		.container {
-			padding: 0 1rem;
-		}
-
-		.hero-title {
-			font-size: 2rem;
-		}
-
-		.site-description {
-			font-size: 1.1rem;
-		}
 	}
 </style>
